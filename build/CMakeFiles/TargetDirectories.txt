@@ -1,2 +1,0 @@
-/home/albert/source/lernen/cmake_proj/build/CMakeFiles/edit_cache.dir
-/home/albert/source/lernen/cmake_proj/build/CMakeFiles/rebuild_cache.dir
