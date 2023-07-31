@@ -2,6 +2,7 @@
 using namespace std;
 
 int main() {
-   cout << "Hello Bitches!!!!!";
+   cout << "Hello";
+   cout << '\te';
    return 0;
 }

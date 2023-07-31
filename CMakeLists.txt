@@ -19,4 +19,4 @@ list(LENGTH SOFTWARE L) # 3
 
 include(src/CMakeLists.txt)
 
-add_executable(MyPro src/main.cpp)
+add_executable(pr src/main.cpp)
