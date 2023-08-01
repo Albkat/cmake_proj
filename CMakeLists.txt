@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.12)
 
 
 # define project
-project(cmake_project)
+project(cmake_project VERSION 0.1 LANGUAGES CXX)
 message("Version: ${CMAKE_VERSION}")
 
 # some variables
@@ -20,3 +20,13 @@ list(LENGTH SOFTWARE L) # 3
 include(src/CMakeLists.txt)
 
 add_executable(pr src/main.cpp)
+add_executable(test1 test/test_print.cpp)
+
+message("SOURCE: ${PROJECT_SOURCE_DIR}")
+message("VERSION: ${PROJECT_VERSION}")
+
+# tests
+enable_testing()
+message("Are the CTest enabled? ${BUILD_TESTING}")
+
+add_test(NAME basic_set COMMAND test1)
