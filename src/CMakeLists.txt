@@ -7,5 +7,6 @@ if (NOT DEFINED "${PROJECT_NAME}-dep")
 endif()
 message(TRACE "name: ${${PROJECT_NAME}-dep}")
 
-# compiler related
-message(VERBOSE "compiler: ${CMAKE_Fortran_COMPILER_VERSION}")
+# compiler-related information
+message(VERBOSE "compiler information: ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION}")
+
