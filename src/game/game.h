@@ -11,8 +11,8 @@ enum class Res {
 
 class GuessingGame{
 public:
-   GuessingGame(int low,int high);
-   Res makeGuess(int guess);
+   GuessingGame(int low,int high); // a constructor
+   Res makeGuess(int guess); // function that returns enumeration
 
 private:
    int lowerL;

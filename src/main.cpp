@@ -1,15 +1,22 @@
 // entry point for number guessing game
 #include <iostream> // analogue to <stdio.h> in C
 #include "game/game.h" // custom header file
+#include "game/check.h" // custom header file
+#include <ctime>
 
 int main() {
 
    int low, up; // specify the range
    int buff;
 
+   time_t now = time(nullptr); // current date and time in seconds
+   char* dati = ctime(&now); // convert to string form
+
+
    // user interaction
    std :: cout << "Welcome to the game!" << std::endl;
-   std :: cout << "Please enter limits (e.g. from 1 to 49)" << std::endl;
+   std :: cout << "The current time: "<< dati << std::endl;
+   std :: cout << "Please enter limits (e.g. from 1 to 49):" << std::endl;
    std :: cin >> low >> up;
 
    // small check if numbers are in the right order
@@ -28,6 +35,23 @@ int main() {
    // create a game instance
    GuessingGame game(low,up);
 
+   int guess, attempt = 0;
+   while(true){
 
+      readInteger(guess, "Enter your guess: ");
+
+      attempt++;
+
+      Res result = game.makeGuess(guess);
+
+      if (result == Res::Correct) {
+         std::cout << "Congratulations! You got it!" << std::endl;
+         break;
+      } else if (result == Res::TooLow) {
+         std::cout << "Your guess is too low" << std::endl;
+      } else {
+         std::cout << "Your guess is too high" << std::endl;
+      }
+   }
    return 0;
 }
