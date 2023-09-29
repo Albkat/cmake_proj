@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.20)
 message(DEBUG "CMake version: ${CMAKE_VERSION}")
 
 # define project
-project("Guess Game" VERSION 0.1 LANGUAGES CXX)
+project("Number guessing game" VERSION 0.2 LANGUAGES CXX)
 
 # print information about the project
 message("Project: ${PROJECT_NAME}")
@@ -23,16 +23,20 @@ set(PARAMS "time" "efficiency")
 list(LENGTH PARAMS L) # 3
 message(TRACE "Number of parameters: ${L}")
 
+# building process
 include(src/CMakeLists.txt)
+#add_library(game src/game/game.cpp src/game/check.cpp)
 
 add_executable(pr src/main.cpp)
-add_executable(test1 test/test_print.cpp)
+
+target_link_libraries(pr game)
 
 
 # tests
-enable_testing()
-message("Are the CTest enabled? ${BUILD_TESTING}")
+#add_executable(test1 test/test_print.cpp)
+#enable_testing()
+#message("Are the CTest enabled? ${BUILD_TESTING}")
 
-add_test(NAME basic_set COMMAND test1)
+#add_test(NAME basic_set COMMAND test1)
 
 include(GNUInstallDirs)
