@@ -21,3 +21,7 @@ Res GuessingGame::makeGuess(int guess) {
       return Res::TooHigh;
    }
 }
+
+int GuessingGame::getSeed() {
+   return secretN;
+}

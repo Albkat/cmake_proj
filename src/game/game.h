@@ -13,6 +13,7 @@ class GuessingGame{
 public:
    GuessingGame(int low,int high); // a constructor
    Res makeGuess(int guess); // function that returns enumeration
+   int getSeed(); //to get secret number
 
 private:
    int lowerL;

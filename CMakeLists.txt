@@ -27,16 +27,13 @@ message(TRACE "Number of parameters: ${L}")
 include(src/CMakeLists.txt)
 #add_library(game src/game/game.cpp src/game/check.cpp)
 
-add_executable(pr src/main.cpp)
+add_executable(guessGame src/main.cpp)
 
-target_link_libraries(pr game)
+target_link_libraries(guessGame game)
 
 
 # tests
-#add_executable(test1 test/test_print.cpp)
-#enable_testing()
-#message("Are the CTest enabled? ${BUILD_TESTING}")
-
-#add_test(NAME basic_set COMMAND test1)
+enable_testing()
+add_subdirectory(tests)
 
 include(GNUInstallDirs)
