@@ -22,7 +22,7 @@ jobs:
       run: g++ --version
 
     - name: setup python env
-      uses: actions/setup-python@v1
+      uses: actions/setup-python@v4
 
     - name: install cmake
       run: pip3 install cmake ninja
@@ -38,4 +38,49 @@ jobs:
 
     - name: test
       run: ctest --test-dir ${{ env.BUILD_DIR }} --parallel
+
+  icc:
+
+    runs-on: ubuntu-latest
+
+    env:
+      APT_PACKAGES:
+        intel-oneapi-compiler-dpcpp-cpp-and-cpp-classic
+        asciidoctor
+
+    steps:
+    - name: checkout codebase
+      uses: actions/checkout@v4
+
+    - name: setup python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.x
+
+    - name: install build system
+      run: pip3 install cmake 
+
+    - name: add intel repo
+      run: |
+        wget https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS-2023.PUB
+        sudo apt-key add GPG-PUB-KEY-INTEL-SW-PRODUCTS-2023.PUB
+        rm GPG-PUB-KEY-INTEL-SW-PRODUCTS-2023.PUB
+        echo "deb https://apt.repos.intel.com/oneapi all main" | sudo tee /etc/apt/sources.list.d/oneAPI.list
+        sudo apt-get update
+
+    - name: install Intel oneAPI compiler
+      run: |
+        sudo apt-get install ${APT_PACKAGES}
+        source /opt/intel/oneapi/setvars.sh
+        printenv >> $GITHUB_ENV
+
+    - name: configure build
+      run: cmake -B ${{ env.BUILD_DIR }} -DCMAKE_CXX_COMPILER=icc
+
+    - name: build project
+      run: cmake --build ${{ env.BUILD_DIR }}
+
+    - name: test
+      run: ctest --parallel --output-on-failure
+      working-directory: ${{ env.BUILD_DIR }}
 
