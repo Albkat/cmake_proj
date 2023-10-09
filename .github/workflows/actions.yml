@@ -1,23 +1,41 @@
-name: C/C++ CI
+name: CI
 
-on:
-  push:
-    branches: [ "core" ]
-  pull_request:
-    branches: [ "core" ]
+# triggers
+on: [push, fork, pull_request]
+
+# build directory
+env:
+  BUILD_DIR: _build
+
 
 jobs:
-  build:
+  
+  gcc:
 
     runs-on: ubuntu-latest
-
+    
     steps:
-    - uses: actions/checkout@v3
-    - name: configure
-      run: ./configure
-    - name: make
-      run: make
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
+    - name: checkout codebase
+      uses: actions/checkout@v4
+
+    - name: check compiler version
+      run: g++ --version
+
+    - name: setup python env
+      uses: actions/setup-python@v1
+
+    - name: install cmake
+      run: pip3 install cmake ninja
+
+    - name: check cmake version
+      run: cmake --version
+
+    - name: configure build
+      run: cmake -B ${{ env.BUILD_DIR }} -G Ninja
+
+    - name: build project
+      run: cmake --build ${{ env.BUILD_DIR }}
+
+    - name: test
+      run: ctest --test-dir ${{ env.BUILD_DIR }} --parallel
+
