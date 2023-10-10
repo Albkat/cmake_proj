@@ -1,30 +1,34 @@
-cmake_minimum_required(VERSION 3.20)
+#Central unit for the build 
+cmake_minimum_required(VERSION 3.26)
 
 # print info about CMake
 message(DEBUG "CMake version: ${CMAKE_VERSION}")
+message("Generator: ${CMAKE_GENERATOR}")
+message("Source: ${CMAKE_SOURCE_DIR}")
 
 # define project
-project("Number guessing game" VERSION 0.2 LANGUAGES CXX)
+project(
+   "guessGame" 
+   VERSION 0.2 
+   LANGUAGES CXX
+)
+
+enable_testing()
 
 # print information about the project
 message("Project: ${PROJECT_NAME}")
-message("Source: ${PROJECT_SOURCE_DIR}")
-message("Version: ${PROJECT_VERSION}")
 
-# some variables
-set(WITH_OpenMPI "allow for parallelization" OFF)
-set(WITH_fmt "nice and safe format" ON)
+# GNU installation conventions  
+include(GNUInstallDirs)
 
-if (CMAKE_VERSION VERSION_LESS "3.20")
-   message(FATAL_ERROR "Minimum required CMake version")
-endif()
+# building process
+add_subdirectory(cmake_config)
+message(FATAL_ERROR "STOP")
 
 set(PARAMS "time" "efficiency")
 list(LENGTH PARAMS L) # 3
 message(TRACE "Number of parameters: ${L}")
 
-# building process
-include(src/CMakeLists.txt)
 #add_library(game src/game/game.cpp src/game/check.cpp)
 
 add_executable(guessGame src/main.cpp)
@@ -35,5 +39,3 @@ target_link_libraries(guessGame game)
 # tests
 enable_testing()
 add_subdirectory(tests)
-
-include(GNUInstallDirs)
