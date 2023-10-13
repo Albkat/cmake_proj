@@ -13,18 +13,15 @@ option(WITH_OpenMPI "allow for parallelization" OFF)
 option(WITH_fmt "nice and safe format" ON)
    
 
-# defined vars
-if (NOT DEFINED "${PROJECT_NAME}-dep")
-   set("${PROJECT_NAME}-dep" "lib1" "lib2")
-endif()
-message(DEBUG "name of PROJECT_NAME-dep: ${${PROJECT_NAME}-dep}")
-
-
 # compiler-related information
-message(VERBOSE "compiler information: ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION}")
+message(VERBOSE "Compiler information: ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION}")
 
-message(FATAL_ERROR "STOP")
+# modules
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/modules")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} PARENT_SCOPE)
 
-add_subdirectory(../src/game)
+# search for packges
+message(VERBOSE "Search for find scripts in: ${CMAKE_MODULE_PATH}")
+find_package("git" REQUIRED)
 
-# add game
+message(VERBOSE "The module 1: ${_lib}")
