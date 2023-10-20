@@ -6,6 +6,9 @@ set(_pkg "git_learn")
 set(_url "https://github.com/Albkat/git_learn")
 
 # check if the package is found
-if(NOT DEFINED "${_pkg}_FIND_METHOD")
+#guess_find_package()
 
-endif()
+# unset variables
+unset(_lib)
+unset(_pkg)
+unset(_url)

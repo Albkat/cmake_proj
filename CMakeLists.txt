@@ -23,7 +23,8 @@ include(GNUInstallDirs)
 
 # building process
 add_subdirectory(cmake_config)
-message(FATAL_ERROR "STOP: ${CMAKE_INSTALL_PREFIX}")
+#get_all_targets(all_targets)
+message(FATAL_ERROR "STOP: ${BUILDSYSTEM_TARGETS}")
 
 set(PARAMS "time" "efficiency")
 list(LENGTH PARAMS L) # 3
