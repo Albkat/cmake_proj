@@ -23,15 +23,12 @@ include(GNUInstallDirs)
 
 # building process
 add_subdirectory(cmake_config)
-#get_all_targets(all_targets)
-message(FATAL_ERROR "STOP: ${BUILDSYSTEM_TARGETS}")
 
-set(PARAMS "time" "efficiency")
-list(LENGTH PARAMS L) # 3
-message(TRACE "Number of parameters: ${L}")
-
-add_subdirectory(src/game)
-#add_library(game src/game/game.cpp src/game/check.cpp)
+# source
+set(srcs)
+set(prog)
+add_subdirectory(src)
+message(FATAL_ERROR "here: ${prog} ${srcs}")
 
 add_executable(guessGame src/main.cpp)
 

@@ -23,7 +23,15 @@ message("Module path: ${CMAKE_MODULE_PATH}")
 
 # search for specific git library
 message(VERBOSE "Search for find scripts in: ${CMAKE_MODULE_PATH}")
-find_package("git1" REQUIRED)
+
+# some dependent projects
+if(NOT TARGET "git::git")
+   find_package("git" REQUIRED)
+endif()
+
+if(NOT TARGET "scf::scf")
+   find_package("scf" REQUIRED)
+endif()
 
 # create git metadata file
 set(version ${PROJECT_VERSION})
