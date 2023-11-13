@@ -1,8 +1,8 @@
 // entry point for number guessing game
 #include <iostream>     // analogue to <stdio.h> in C
-#include "game/game.h"  // custom header file
-#include "game/check.h" // custom header file
-#include "game/input.h" // header for inputreader
+#include "game.h"  // custom header file
+#include "check.h" // custom header file
+#include "input.h" // header for inputreader
 #include <ctime>
 
 int main(int argc, char* argv[]) {
